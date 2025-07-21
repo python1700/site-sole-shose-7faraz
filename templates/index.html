@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>زیره کفش هفت فراز</title>
+    <!-- فونت فارسی -->
+    <link href="https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.css" rel="stylesheet" />
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Vazir', sans-serif;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                url("/static/images/9.jpg") no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 2.5rem;
+            color: #ffd700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 30px 0;
+            gap: 20px;
+        }
+
+        .gallery img {
+            width: 220px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.5);
+        }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .lightbox img {
+            max-width: 90vw;
+            max-height: 90vh;
+            border-radius: 12px;
+        }
+
+        /* کانتینر دکمه‌ها در بالا سمت راست */
+        .button-group {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px; /* فاصله بین دکمه‌ها */
+            z-index: 1100;
+        }
+
+        .about-button {
+            background-color: #ffd700;
+            color: #222;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .about-button:hover {
+            background-color: #e0c200;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <h1>زیره‌کفش هفت فراز</h1>
+
+    <div class="gallery">
+        {% for img in images %}
+            <img src="{{ img }}" alt="زیره کفش هفت فراز" onclick="openLightbox(this.src)" />
+        {% endfor %}
+    </div>
+
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <img id="lightbox-img" src="" alt="نمایش تصویر بزرگ" />
+    </div>
+
+    <!-- دکمه‌ها کنار هم در بالا سمت راست -->
+    <div class="button-group">
+        <button class="about-button" onclick="goToAbout()">درباره ما</button>
+        <button class="about-button" onclick="window.location.href='/register'">ثبت‌نام</button>
+        <button class="about-button" onclick="window.location.href='/login'">ورود</button>
+    </div>
+
+    <script>
+        function openLightbox(src) {
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox').style.display = 'flex';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+        }
+
+        function goToAbout() {
+            window.location.href = "/about";
+        }
+    </script>
+</body>
+</html>
